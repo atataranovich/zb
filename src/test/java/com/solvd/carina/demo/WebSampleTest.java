@@ -22,6 +22,7 @@ import com.qaprosoft.carina.core.foundation.utils.tag.TestPriority;
 import com.qaprosoft.carina.core.foundation.utils.tag.TestTag;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -37,6 +38,7 @@ import com.solvd.carina.demo.gui.pages.CompareModelsPage;
 import com.solvd.carina.demo.gui.pages.HomePage;
 import com.solvd.carina.demo.gui.pages.ModelInfoPage;
 import com.solvd.carina.demo.gui.pages.NewsPage;
+import com.solvd.carina.demo.utils.DriverUtils;
 
 /**
  * This sample shows how create Web test.
@@ -84,7 +86,9 @@ public class WebSampleTest extends AbstractTest {
         CompareModelsPage comparePage = footerMenu.openComparePage();
         // Compare 3 models
         List<ModelSpecs> specs = comparePage.compareModels("Samsung Galaxy J3", "Samsung Galaxy J5", "Samsung Galaxy J7 Pro");
-        // Verify model announced dates
+        // Verify model announced dates       
+        WebDriver secondDriver = new DriverUtils().createDriver();
+        secondDriver.get("https://context.reverso.net");
         Assert.assertEquals(specs.get(0).readSpec(SpecType.ANNOUNCED), "2015, November");
         Assert.assertEquals(specs.get(1).readSpec(SpecType.ANNOUNCED), "2015, June");
         Assert.assertEquals(specs.get(2).readSpec(SpecType.ANNOUNCED), "2017, June");
