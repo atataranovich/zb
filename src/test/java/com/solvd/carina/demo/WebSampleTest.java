@@ -112,5 +112,62 @@ public class WebSampleTest extends AbstractTest {
             Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
         }
     }
+    
+    @Test(description = "JIRA#AUTO-0010")
+    @MethodOwner(owner = "qpsdemo")
+    public void testSimpleSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
+
+        final String searchQ = "iphone";
+        List<NewsItem> news = newsPage.searchNews(searchQ);
+        Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
+        for(NewsItem n : news) {
+            System.out.println(n.readTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        }
+    }
+    
+    @Test(description = "JIRA#AUTO-0010")
+    @MethodOwner(owner = "qpsdemo")
+    public void testRandomSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
+
+        final String searchQ = "iphone";
+        List<NewsItem> news = newsPage.searchNews(searchQ);
+        Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
+        for(NewsItem n : news) {
+            System.out.println(n.readTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        }
+    }
+    
+    @Test(description = "JIRA#AUTO-0010")
+    @MethodOwner(owner = "qpsdemo")
+    public void testOtherSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
+
+        final String searchQ = "iphone";
+        List<NewsItem> news = newsPage.searchNews(searchQ);
+        Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
+        for(NewsItem n : news) {
+            System.out.println(n.readTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        }
+    }
 
 }
