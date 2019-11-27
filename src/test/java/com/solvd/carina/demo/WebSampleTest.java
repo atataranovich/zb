@@ -74,7 +74,7 @@ public class WebSampleTest extends AbstractTest {
     @Test(description = "JIRA#AUTO-0009")
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P1)
-    @TestTag(name = "area test", value = "web")
+    @TestTag(name = "area test",  value = "web")
     public void testCompareModels() {
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
@@ -169,5 +169,52 @@ public class WebSampleTest extends AbstractTest {
             Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
         }
     }
+    
+    @Test(description = "JIRA#AUTO-0009")
+    @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P1)
+    @TestTag(name = "area test",  value = "web")
+    public void testCompareDifferentModels() {
+        // Open GSM Arena home page and verify page is opened
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        // Open model compare page
+        FooterMenu footerMenu = homePage.getFooterMenu();
+        Assert.assertTrue(footerMenu.isUIObjectPresent(2), "Footer menu wasn't found!");
+        CompareModelsPage comparePage = footerMenu.openComparePage();
+        // Compare 3 models
+        List<ModelSpecs> specs = comparePage.compareModels("Samsung Galaxy J3", "Samsung Galaxy J5", "Samsung Galaxy J7 Pro");
+        // Verify model announced dates       
+        WebDriver secondDriver = new DriverUtils().createDriver();
+        secondDriver.get("https://context.reverso.net");
+        Assert.assertEquals(specs.get(0).readSpec(SpecType.ANNOUNCED), "2015, November");
+        Assert.assertEquals(specs.get(1).readSpec(SpecType.ANNOUNCED), "2015, June");
+        Assert.assertEquals(specs.get(2).readSpec(SpecType.ANNOUNCED), "2017, June");
+    }
+    
+    @Test(description = "JIRA#AUTO-0009")
+    @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P1)
+    @TestTag(name = "area test",  value = "web")
+    public void testCompareParticularModels() {
+        // Open GSM Arena home page and verify page is opened
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        // Open model compare page
+        FooterMenu footerMenu = homePage.getFooterMenu();
+        Assert.assertTrue(footerMenu.isUIObjectPresent(2), "Footer menu wasn't found!");
+        CompareModelsPage comparePage = footerMenu.openComparePage();
+        // Compare 3 models
+        List<ModelSpecs> specs = comparePage.compareModels("Samsung Galaxy J3", "Samsung Galaxy J5", "Samsung Galaxy J7 Pro");
+        // Verify model announced dates       
+        WebDriver secondDriver = new DriverUtils().createDriver();
+        secondDriver.get("https://context.reverso.net");
+        Assert.assertEquals(specs.get(0).readSpec(SpecType.ANNOUNCED), "2015, November");
+        Assert.assertEquals(specs.get(1).readSpec(SpecType.ANNOUNCED), "2015, June");
+        Assert.assertEquals(specs.get(2).readSpec(SpecType.ANNOUNCED), "2017, June");
+    }
+
 
 }
